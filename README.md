@@ -1,5 +1,6 @@
 # Volunteer Platform (In Progress)
-![uset8]https://i.pinimg.com/564x/b5/d1/a3/b5d1a3720014e3969d9bfdfb044fbf5f.jpg)
+![Project Logo](./images/https://i.pinimg.com/564x/79/08/65/790865bd943efbd094d1f5b60242fc79.jpg)
+
 
 This project is a work in progress. Volunteer Platform is a web application developed using Spring Boot to manage volunteer activities.
 
