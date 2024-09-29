@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>User Subscriptions</title>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900">
+<header th:insert="fragments/menu :: menu"></header>
+<div class="container mx-auto mt-10">
+    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+        <h1 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">My Subscriptions</h1>
+        <table class="min-w-full bg-white dark:bg-gray-800">
+            <thead>
+            <tr>
+                <th class="py-2 text-left text-gray-700 dark:text-gray-300">ID</th>
+                <th class="py-2 text-left text-gray-700 dark:text-gray-300">Name</th>
+                <th class="py-2 text-left text-gray-700 dark:text-gray-300">Role</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${subscriptions}">
+                <td th:text="${user.id}" class="py-2 text-gray-900 dark:text-white">1</td>
+                <td th:text="${user.name}" class="py-2 text-gray-900 dark:text-white">User Name</td>
+                <td th:text="${user.role}" class="py-2 text-gray-900 dark:text-white">Role</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer th:insert="fragments/footer :: footer" class="bg-white dark:bg-gray-800 mt-10"></footer>
+</body>
+</html>
