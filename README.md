@@ -1,4 +1,5 @@
 # Volunteer Platform (In Progress)
+![MARIO](https://github.com/https://steamuserimages-a.akamaihd.net/ugc/2015977670103146290/B1DCD675B2C8E52F067CCDAE35C792FC4221F59E/) 
 
 This project is a work in progress. Volunteer Platform is a web application developed using Spring Boot to manage volunteer activities.
 
