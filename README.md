@@ -1,5 +1,5 @@
 # Volunteer Platform (In Progress)
-![uset8](https://i.ibb.co/https://memepedia.ru/wp-content/uploads/2021/07/tvoi-zaprosy-v-3-chasa-nochi-768x585.jpn)
+![uset8]https://i.pinimg.com/564x/b5/d1/a3/b5d1a3720014e3969d9bfdfb044fbf5f.jpg)
 
 This project is a work in progress. Volunteer Platform is a web application developed using Spring Boot to manage volunteer activities.
 
