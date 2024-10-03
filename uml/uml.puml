@@ -1,0 +1,111 @@
+@startuml
+
+class User {
+  Long id
+  String name
+  String email
+  String password
+  Role role
+  String avatarUrl
+  String description
+  + register(): void
+  + login(): void
+  + updateProfile(): void
+  + changePassword(): void
+  + subscribeToUser(User user): void
+  + getSubscriptions(): List<User>
+}
+
+class Role {
+  Long id
+  String name
+}
+
+class Project {
+  Long id
+  String title
+  String description
+  String location
+  Date startDate
+  Date endDate
+  User organizer
+  ProjectStatus status
+  + createProject(): void
+  + updateProject(): void
+  + deleteProject(): void
+  + getVolunteers(): List<Volunteer>
+  + notifyVolunteers(String message): void
+}
+
+class ProjectStatus {
+  Long id
+  String name
+}
+
+class Volunteer {
+  Long id
+  User user
+  Project project
+  Date registrationDate
+  + registerForProject(Project project): void
+  + leaveFeedback(Project project, int rating, String comment): void
+}
+
+class Feedback {
+  Long id
+  Volunteer volunteer
+  Project project
+  int rating
+  String comment
+  Date date
+  + submitFeedback(): void
+  + getFeedbackForProject(Project project): List<Feedback>
+}
+
+class Notification {
+  Long id
+  User user
+  String message
+  Date date
+  + sendNotification(User user, String message): void
+  + getNotificationsForUser(User user): List<Notification>
+}
+
+class Report {
+  Long id
+  Project project
+  String content
+  Date createdAt
+  + generateReport(Project project): Report
+}
+
+class City {
+  Long id
+  String name
+  List<Project> projects
+  + getProjectsForCity(): List<Project>
+}
+
+class Subscription {
+  Long id
+  User follower
+  User followee
+  + subscribe(User follower, User followee): void
+  + unsubscribe(User follower, User followee): void
+  + getSubscriptionsForUser(User user): List<Subscription>
+}
+
+User "1" -- "1" Role : has
+Project "1" -- "1" User : organized by
+Volunteer "1" -- "1" User : is
+Volunteer "1" -- "1" Project : participates in
+Feedback "1" -- "1" Volunteer : written by
+Feedback "1" -- "1" Project : about
+Notification "1" -- "1" User : notifies
+Report "1" -- "1" Project : is about
+Project "0..*" -- "1" City : located in
+Subscription "1" -- "1" User : follower
+Subscription "1" -- "1" User : followee
+
+@enduml
+
