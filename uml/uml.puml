@@ -1,5 +1,6 @@
 @startuml
 
+' Классы
 class User {
   Long id
   String name
@@ -16,9 +17,10 @@ class User {
   + getSubscriptions(): List<User>
 }
 
-class Role {
-  Long id
-  String name
+enum Role {
+  VOLUNTEER
+  ORGANIZER
+  ADMIN
 }
 
 class Project {
@@ -95,6 +97,219 @@ class Subscription {
   + getSubscriptionsForUser(User user): List<Subscription>
 }
 
+' Репозитории
+interface UserRepository {
+  + findByEmail(String email): User
+  + findById(Long id): User
+  + save(User user): void
+  + delete(User user): void
+  + findAll(): List<User>
+}
+
+interface ProjectRepository {
+  + findById(Long id): Project
+  + findAll(): List<Project>
+  + save(Project project): void
+  + delete(Project project): void
+}
+
+interface FeedbackRepository {
+  + findByProject(Project project): List<Feedback>
+  + save(Feedback feedback): void
+  + delete(Feedback feedback): void
+}
+
+interface NotificationRepository {
+  + findByUser(User user): List<Notification>
+  + save(Notification notification): void
+  + delete(Notification notification): void
+}
+
+interface SubscriptionRepository {
+  + findByFollower(User follower): List<Subscription>
+  + findByFollowee(User followee): List<Subscription>
+  + save(Subscription subscription): void
+  + delete(Subscription subscription): void
+}
+
+interface CityRepository {
+  + findById(Long id): City
+  + findAll(): List<City>
+  + save(City city): void
+  + delete(City city): void
+}
+
+' Сервисы
+interface UserService {
+  + register(User user): void
+  + login(String email, String password): User
+  + updateProfile(User user): void
+  + changePassword(User user, String newPassword): void
+  + subscribeToUser(User follower, User followee): void
+  + getSubscriptions(User user): List<User>
+  + deleteUser(User user): void
+  + getAllUsers(): List<User>
+  + updateUserRole(Long userId, Role role): void
+}
+
+class UserServiceImpl {
+  UserRepository userRepository
+  + register(User user): void
+  + login(String email, String password): User
+  + updateProfile(User user): void
+  + changePassword(User user, String newPassword): void
+  + subscribeToUser(User follower, User followee): void
+  + getSubscriptions(User user): List<User>
+  + deleteUser(User user): void
+  + getAllUsers(): List<User>
+  + updateUserRole(Long userId, Role role): void
+}
+
+interface ProjectService {
+  + createProject(Project project): void
+  + updateProject(Project project): void
+  + deleteProject(Project project): void
+  + getVolunteers(Project project): List<Volunteer>
+  + notifyVolunteers(Project project, String message): void
+  + getAllProjects(): List<Project>
+}
+
+class ProjectServiceImpl {
+  ProjectRepository projectRepository
+  + createProject(Project project): void
+  + updateProject(Project project): void
+  + deleteProject(Project project): void
+  + getVolunteers(Project project): List<Volunteer>
+  + notifyVolunteers(Project project, String message): void
+  + getAllProjects(): List<Project>
+}
+
+interface FeedbackService {
+  + submitFeedback(Feedback feedback): void
+  + getFeedbackForProject(Project project): List<Feedback>
+  + deleteFeedback(Feedback feedback): void
+}
+
+class FeedbackServiceImpl {
+  FeedbackRepository feedbackRepository
+  + submitFeedback(Feedback feedback): void
+  + getFeedbackForProject(Project project): List<Feedback>
+  + deleteFeedback(Feedback feedback): void
+}
+
+interface NotificationService {
+  + sendNotification(User user, String message): void
+  + getNotificationsForUser(User user): List<Notification>
+  + deleteNotification(Notification notification): void
+}
+
+class NotificationServiceImpl {
+  NotificationRepository notificationRepository
+  + sendNotification(User user, String message): void
+  + getNotificationsForUser(User user): List<Notification>
+  + deleteNotification(Notification notification): void
+}
+
+interface SubscriptionService {
+  + subscribe(User follower, User followee): void
+  + unsubscribe(User follower, User followee): void
+  + getSubscriptionsForUser(User user): List<Subscription>
+  + deleteSubscription(Subscription subscription): void
+}
+
+class SubscriptionServiceImpl {
+  SubscriptionRepository subscriptionRepository
+  + subscribe(User follower, User followee): void
+  + unsubscribe(User follower, User followee): void
+  + getSubscriptionsForUser(User user): List<Subscription>
+  + deleteSubscription(Subscription subscription): void
+}
+
+interface CityService {
+  + getProjectsForCity(City city): List<Project>
+  + getAllCities(): List<City>
+  + deleteCity(City city): void
+}
+
+class CityServiceImpl {
+  CityRepository cityRepository
+  + getProjectsForCity(City city): List<Project>
+  + getAllCities(): List<City>
+  + deleteCity(City city): void
+}
+
+' Контроллеры
+class UserController {
+  UserService userService
+  + register(User user): void
+  + login(String email, String password): User
+  + updateProfile(User user): void
+  + changePassword(User user, String newPassword): void
+  + subscribeToUser(User follower, User followee): void
+  + getSubscriptions(User user): List<User>
+  + deleteUser(User user): void
+  + getAllUsers(): List<User>
+  + updateUserRole(Long userId, Role role): void
+}
+
+class ProjectController {
+  ProjectService projectService
+  + createProject(Project project): void
+  + updateProject(Project project): void
+  + deleteProject(Project project): void
+  + getVolunteers(Project project): List<Volunteer>
+  + notifyVolunteers(Project project, String message): void
+  + getAllProjects(): List<Project>
+}
+
+class FeedbackController {
+  FeedbackService feedbackService
+  + submitFeedback(Feedback feedback): void
+  + getFeedbackForProject(Project project): List<Feedback>
+  + deleteFeedback(Feedback feedback): void
+}
+
+class NotificationController {
+  NotificationService notificationService
+  + sendNotification(User user, String message): void
+  + getNotificationsForUser(User user): List<Notification>
+  + deleteNotification(Notification notification): void
+}
+
+class SubscriptionController {
+  SubscriptionService subscriptionService
+  + subscribe(User follower, User followee): void
+  + unsubscribe(User follower, User followee): void
+  + getSubscriptionsForUser(User user): List<Subscription>
+  + deleteSubscription(Subscription subscription): void
+}
+
+class CityController {
+  CityService cityService
+  + getProjectsForCity(City city): List<Project>
+  + getAllCities(): List<City>
+  + deleteCity(City city): void
+}
+
+class AdminController {
+  UserService userService
+  + getAllUsers(): List<User>
+  + updateUserRole(Long userId, Role role): void
+  + deleteUser(User user): void
+  + getAllProjects(): List<Project>
+}
+
+' Секьюрити
+class SecurityConfig {
+  + configure(HttpSecurity http): void
+}
+
+class CustomUserDetailsService {
+  UserRepository userRepository
+  + loadUserByUsername(String username): UserDetails
+}
+
+' Связи между классами, репозиториями, сервисами и контроллерами
 User "1" -- "1" Role : has
 Project "1" -- "1" User : organized by
 Volunteer "1" -- "1" User : is
@@ -107,5 +322,24 @@ Project "0..*" -- "1" City : located in
 Subscription "1" -- "1" User : follower
 Subscription "1" -- "1" User : followee
 
+UserServiceImpl --|> UserRepository
+ProjectServiceImpl --|> ProjectRepository
+FeedbackServiceImpl --|> FeedbackRepository
+NotificationServiceImpl --|> NotificationRepository
+SubscriptionServiceImpl --|> SubscriptionRepository
+CityServiceImpl --|> CityRepository
+
+UserController --|> UserServiceImpl
+ProjectController --|> ProjectServiceImpl
+FeedbackController --|> FeedbackServiceImpl
+NotificationController --|> NotificationServiceImpl
+SubscriptionController --|> SubscriptionServiceImpl
+CityController --|> CityServiceImpl
+AdminController --|> UserServiceImpl
+
+CustomUserDetailsService --|> UserRepository
+SecurityConfig --> CustomUserDetailsService
+
 @enduml
+
 
