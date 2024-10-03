@@ -1,16 +1,15 @@
-package com.volunteer.platform.service;
+package com.volunteer.platform.service.impl;
 
 import com.volunteer.platform.model.City;
 import com.volunteer.platform.model.Project;
 import com.volunteer.platform.repository.CityRepository;
-import com.volunteer.platform.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CityServiceImpl implements CityService {
+public class CityServiceImpl implements FeedbackServiceImpl.CityService {
 
     @Autowired
     private CityRepository cityRepository;

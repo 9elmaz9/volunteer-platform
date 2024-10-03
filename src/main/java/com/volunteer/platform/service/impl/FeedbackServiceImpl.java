@@ -1,5 +1,6 @@
-package com.volunteer.platform.service;
+package com.volunteer.platform.service.impl;
 
+import com.volunteer.platform.model.City;
 import com.volunteer.platform.model.Feedback;
 import com.volunteer.platform.model.Project;
 import com.volunteer.platform.repository.FeedbackRepository;
@@ -28,5 +29,12 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public void deleteFeedback(Feedback feedback) {
         feedbackRepository.delete(feedback);
+    }
+
+    public static interface CityService {
+        List<Project> getProjectsForCity(City city);
+        List<City> getAllCities();
+        void deleteCity(City city);
+        void addCity(City city);
     }
 }

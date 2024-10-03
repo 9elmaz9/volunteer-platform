@@ -1,4 +1,4 @@
-package com.volunteer.platform.service;
+package com.volunteer.platform.service.impl;
 
 import com.volunteer.platform.model.Notification;
 import com.volunteer.platform.model.User;

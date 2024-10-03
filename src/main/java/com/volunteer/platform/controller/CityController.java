@@ -2,7 +2,7 @@ package com.volunteer.platform.controller;
 
 import com.volunteer.platform.model.City;
 import com.volunteer.platform.model.Project;
-import com.volunteer.platform.service.CityService;
+import com.volunteer.platform.service.impl.FeedbackServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class CityController {
 
     @Autowired
-    private CityService cityService;
+    private FeedbackServiceImpl.CityService cityService;
 
     @PostMapping
     public void addCity(@RequestBody City city) {
